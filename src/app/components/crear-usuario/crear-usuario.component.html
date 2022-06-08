@@ -1,0 +1,96 @@
+<div class="container mt-5">
+    <div class="col-lg-6 offset-lg-3">
+        <div class="card">
+            <div class="card-body text-center">
+                <span class="titulo">{{ titulo | uppercase }}</span>
+                <form class="mt-3" [formGroup]="usuarioForm" (ngSubmit)="agregarUsuario()" enctype="multipart/form-data" oninput='contrasena2.setCustomValidity(contrasena2.value != contrasena.value ? "Passwords do not match." : "")'>
+                  <div class="mb-3">
+
+                      <label for="nombresLabel">Nombres del usuario</label>
+                      <input type="text" formControlName="nombres"
+                         class="form-control form-control-lg" placeholder="Nombres">
+                      <div class="text-danger" *ngIf="usuarioForm.controls['nombres'].errors?.['required'] && usuarioForm.controls['nombres'].touched">
+                          <span>Los nombres de usuario <strong>son obligatorios</strong></span>
+                      </div>
+
+                  </div>
+                  <div class="mb-3">
+
+                      <label for="apellido_paternoLabel">Apellido paterno del usuario</label>
+                      <input type="text" formControlName="apellido_paterno"
+                          class="form-control form-control-lg" placeholder="Apellido paterno">
+                      <div class="text-danger" *ngIf="usuarioForm.controls['apellido_paterno'].errors?.['required'] && usuarioForm.controls['apellido_paterno'].touched">
+                          <span>El apellido paterno <strong>es obligatorio</strong></span>
+                      </div>
+
+                  </div>
+                  <div class="mb-3">
+
+                      <label for="apellido_maternoLabel">Apellido materno del usuario</label>
+                      <input type="text" formControlName="apellido_materno"
+                          class="form-control form-control-lg" placeholder="Apellido materno">
+                      <div class="text-danger" *ngIf="usuarioForm.controls['apellido_materno'].errors?.['required'] && usuarioForm.controls['apellido_materno'].touched">
+                          <span>La ubicación <strong>es obligatorio</strong></span>
+                      </div>
+
+                  </div>
+                  <div class="mb-3">
+
+                      <label for="nacimientoLabel">Nacimiento</label>
+                      <input type="date" formControlName="nacimiento"
+                          class="form-control form-control-lg" placeholder="Nacimiento">
+                      <div class="text-danger" *ngIf="usuarioForm.controls['nacimiento'].errors?.['required'] && usuarioForm.controls['nacimiento'].touched">
+                          <span>Nacimiento <strong>es obligatorio</strong></span>    
+                      </div>       
+
+                  </div>
+                  <div class="mb-3">
+
+                      <label for="correoLabel">Correo Electronico</label>
+                      <input type="email" formControlName="correo"
+                          class="form-control form-control-lg" placeholder="Correo electronico">
+                      <div class="text-danger" *ngIf="usuarioForm.controls['correo'].errors?.['required'] && usuarioForm.controls['correo'].touched">
+                          <span>El correo <strong>es obligatorio</strong></span>
+                      </div>
+
+                  </div>
+                  <div class="mb-3">
+
+                    <label for="contrasenaLabel">Contraseña</label>
+                    <input type="password" formControlName="contrasena" id="contrasena" name="contrasena"
+                        class="form-control form-control-lg" placeholder="Contraseña">
+                    <div class="text-danger" *ngIf="usuarioForm.controls['contrasena'].errors?.['required'] && usuarioForm.controls['contrasena'].touched">
+                        <span>La contraseña <strong>es obligatoria</strong></span>
+                    </div>
+
+                  </div>
+                  <div class="mb-3">
+
+                    <label for="contrasenaLabel">Confirmar contraseña</label>
+                    <input type="password" id="contrasena2" name="contrasena2"
+                        class="form-control form-control-lg" placeholder="Confirmar Contraseña" required>
+                  </div>
+
+                  <div class="mb-3">
+                      <button type="submit" [disabled]="usuarioForm.invalid" class="btn btn-success btn-lg float-end">Registrar</button>
+                  </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var password = document.getElementById("contrasena"), confirm_password = document.getElementById("contrasena2");
+
+    function validatePassword(){
+    if(password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Las contraseñas no son las mismas");
+    } else {
+        confirm_password.setCustomValidity('');
+    }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+</script>
